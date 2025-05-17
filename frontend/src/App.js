@@ -1,3 +1,5 @@
+// Ensure .env file has: REACT_APP_BACKEND_URL=http://localhost:5001
+
 import React, { useEffect, useRef, useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import Peer from "simple-peer";
@@ -9,7 +11,9 @@ import AssignmentIcon from "@material-ui/icons/Assignment";
 import Navbar from "./components/Navbar";
 import "./App.css";
 
-const socket = io.connect(process.env.REACT_APP_BACKEND_URL || "http://localhost:5001");
+const socket = io.connect("https://telecounselling-2.onrender.com" || "http://localhost:5001");
+
+// Rest of your App component (same as before)...
 
 function App() {
   const [me, setMe] = useState("");
@@ -169,37 +173,19 @@ function App() {
         <h1 className="heading">MindConnect - Secure Video Consultation</h1>
         <div className="glass-card">
           <div className="video-container">
-            {/* Remote video (full size) with name tag */}
             {callAccepted && !callEnded ? (
               <div className="video-wrapper">
-                <video
-                  playsInline
-                  ref={userVideo}
-                  autoPlay
-                  className="remote-video"
-                />
-                {/* Show name only if callerName exists, else no label */}
+                <video playsInline ref={userVideo} autoPlay className="remote-video" />
                 {callerName && <div className="name-tag">{callerName}</div>}
               </div>
             ) : (
-              <div
-                className="remote-video"
-                style={{ display: "flex", alignItems: "center", justifyContent: "center", color: "#ccc" }}
-              >
+              <div className="remote-video" style={{ display: "flex", alignItems: "center", justifyContent: "center", color: "#ccc" }}>
                 Waiting for connection...
               </div>
             )}
 
-            {/* Local video (small overlay) with name tag */}
             <div className="video-wrapper local-video-wrapper">
-              <video
-                playsInline
-                muted
-                ref={myVideo}
-                autoPlay
-                className="local-video"
-              />
-              {/* Show name only if myName exists, else no label */}
+              <video playsInline muted ref={myVideo} autoPlay className="local-video" />
               {myName && <div className="name-tag local-name-tag">{myName}</div>}
             </div>
           </div>
