@@ -8,7 +8,6 @@ const io = require("socket.io")(server, {
   cors: {
     origin: [
       "http://localhost:3000", // Local React app
-      "https://mindwise-telecounselling.netlify.app/" // Replace with your actual Netlify domain
       "https://mindwise-telecounselling.netlify.app" // Replace with your actual Netlify domain
     ],
     methods: ["GET", "POST"]
